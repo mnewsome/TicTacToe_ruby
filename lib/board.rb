@@ -3,7 +3,7 @@ class Board
 
   def initialize(number_of_spaces)
     @number_of_spaces = number_of_spaces
-    @board_size = Math.sqrt(@number_of_spaces)
+    @board_size = Math.sqrt(@number_of_spaces).to_i
     initialize_spaces
   end
 
@@ -38,17 +38,17 @@ class Board
   end
 
   def is_winner_declared?
-   @rows = @spaces.keys.each_slice(@board_size)
-   @columns = @rows.transpose
-   array_size = @board_size - 1
-   @left_diagonal = (0..array_size).collect{ |i| @rows[i][i] }
-   @right_diagonal = (0..array_size).collect{ |i| @rows[i][array_size - i] }
+   rows_have_a_winner?
+   #@columns = @rows.transpose
+   #array_size = @board_size - 1
+   #@left_diagonal = (0..array_size).collect{ |i| @rows[i][i] }
+   #@right_diagonal = (0..array_size).collect{ |i| @rows[i][array_size - i] }
   end
 
   def rows_have_a_winner?
-    @rows = @spaces.values.each_slice(@board_size)
-    (0...@rows).each do |i|
-      if @rows[i].uniq == 1
+    @rows = @spaces.values.each_slice(@board_size).to_a
+    (0...@board_size).each do |i|
+      if @rows[i].uniq.length == 1 && @rows[i].uniq != ""
         return true
       else
         return false

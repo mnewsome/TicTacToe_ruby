@@ -57,4 +57,26 @@ describe Board do
        @board.is_a_tie?.should eq false
      end
    end
+
+   describe "#is_winner_declared?" do
+     it "should return false" do
+       @board.is_winner_declared?.should eq false
+     end
+   end
+
+   describe "#rows_have_winner?" do
+     it "should return true" do
+       @board.spaces[1] = "X"
+       @board.spaces[2] = "X"
+       @board.spaces[3] = "X"
+       @board.rows_have_a_winner?.should eq true
+     end
+   end
+
+   describe "#rows_have_a_winner?" do
+     it "should return false" do
+       @board.rows_have_a_winner?.should eq false
+
+     end
+   end
 end
