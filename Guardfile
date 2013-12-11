@@ -7,7 +7,8 @@ guard :rspec do
   watch('spec/spec_helper.rb')  { "spec" }
   watch('spec/player_spec.rb')  { "player" }
   watch('spec/board_spec.rb')  { "board" }
-  watch('spec/game_spec.rb') { "game"}
+  watch('spec/game_spec.rb') { "game" }
+  watch('spec/game_state_spec.rb') { "game_state" }
 
   # Rails example
   watch(%r{^app/(.+)\.rb$})                           { |m| "spec/#{m[1]}_spec.rb" }

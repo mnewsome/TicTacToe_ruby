@@ -1,5 +1,5 @@
 class Board
-  attr_accessor :spaces, :rows, :columns
+  attr_accessor :spaces, :rows, :columns, :board_size, :left_diagonal, :right_diagonal
 
   def initialize(number_of_spaces)
     @number_of_spaces = number_of_spaces
@@ -15,45 +15,20 @@ class Board
     return @spaces
   end
 
-  def is_board_full?
-    @spaces.each do |key, value|
-      if value == ""
-        return false
-      else
-        return true
-      end
-    end
+  def rows
+    @rows = spaces.values.each_slice(@board_size).to_a
   end
 
-  def is_a_tie?
-    if is_board_full?
-      if not is_winner_declared?
-        return true
-      else
-        return false
-      end
-    else
-      return false
-    end
+  def columns
+    @columns = @rows.transpose
   end
 
-  def is_winner_declared?
-   rows_have_a_winner?
-   #@columns = @rows.transpose
-   #array_size = @board_size - 1
-   #@left_diagonal = (0..array_size).collect{ |i| @rows[i][i] }
-   #@right_diagonal = (0..array_size).collect{ |i| @rows[i][array_size - i] }
+  def left_diagonal
+    @left_diagonal = (0...@board_size).collect { |i| @rows[i][i] }
   end
 
-  def rows_have_a_winner?
-    @rows = @spaces.values.each_slice(@board_size).to_a
-    (0...@board_size).each do |i|
-      if @rows[i].uniq.length == 1 && @rows[i].uniq != ""
-        return true
-      else
-        return false
-      end
-    end
+  def right_diagonal
+    @right_diagonal = (0...@board_size).collect { |i| @rows[i][(@board_size - 1) - i] }
   end
 end
 
