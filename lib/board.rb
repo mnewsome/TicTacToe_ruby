@@ -1,5 +1,6 @@
 class Board
   attr_accessor :spaces, :rows, :columns, :board_size, :left_diagonal, :right_diagonal
+  attr_reader :number_of_spaces
 
   def initialize(number_of_spaces)
     @number_of_spaces = number_of_spaces
