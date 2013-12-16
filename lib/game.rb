@@ -22,12 +22,20 @@ class Game
   end
 
   def select_token
-   token = @ui.get_input("First, choose your player token -- 'x' or 'o' ").downcase
-   # while token != "x" || token != "o"
-   #     token = @ui.get_input("Please choose 'x' or 'o'").downcase
-   # end
-   # token
+   @token = @ui.get_input("First, choose your player token -- 'x' or 'o' ")
+   if not is_token_valid?(token)
+       select_token
+   end
+   @token
   end
+
+  def is_token_valid?(token_to_validate)
+    if token_to_validate.downcase == "x" || token_to_validate.downcase == "o"
+        return true
+    else
+        return false
+    end
+  end  
 
 end
 
