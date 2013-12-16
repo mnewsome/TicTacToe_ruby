@@ -17,7 +17,7 @@ describe UI do
 
   describe "#print_board" do
     it "should print the board to terminal" do
-      @ui.print_board(@board.number_of_spaces)
+      @ui.print_board(@board.board_map)
     end
   end
 
@@ -31,7 +31,7 @@ describe UI do
 
   describe "#get_input" do
     it "should get input from a user and return that value" do
-    input = @ui.get_input("message")
+    input = @ui.get_input("UI Class. Test Input")
     input.should eq "x" 
     end
   end
