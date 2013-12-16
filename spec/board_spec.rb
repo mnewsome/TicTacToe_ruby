@@ -31,4 +31,43 @@ describe Board do
      end
    end
 
+  describe "#board_map" do
+    it "should return nested arrays with the keys from initalize_spaces" do
+        @board.board_map.should eq [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    end 
+  end
+
+  describe "#rows" do
+    it "should return nested arrays with the values of the spaces" do
+      @board.rows.should eq [["", "", ""], ["", "", ""], ["", "", ""]]
+    end
+  end
+
+  describe "#columns" do
+    it "should retun next arays with the values of the spaces" do
+      @board.spaces[2] = "x"
+      @board.spaces[5] = "o"
+      @board.spaces[8] = "x"
+      @board.columns.should eq [["", "", ""], ["x", "o", "x"], ["", "", ""]]
+    end
+  end
+
+  describe "#left_diagonal" do
+    it "should ruturn an array with the values of the spaces" do
+      @board.spaces[1] = "x"
+      @board.spaces[5] = "x"
+      @board.spaces[9] = "x"
+      @board.left_diagonal.should eq ["x", "x", "x"]
+    end
+  end
+
+  describe "#right_diagonal" do
+      it "should return an array with the values of the spaces" do
+        @board.spaces[3] = "x"
+        @board.spaces[5] = "x"
+        @board.spaces[7] = "x"
+        @board.right_diagonal.should eq ["x", "x", "x"]
+      end
+  end
 end
+

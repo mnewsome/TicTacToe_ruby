@@ -15,7 +15,12 @@ class UI
   end
 
   def print_message(message)
-    $stdout.puts message
-    return message
+    $stdout.puts message + "\n"
+    message
+  end
+
+  def get_input(instruction)
+      puts instruction
+      STDIN.gets.chomp
   end
 end

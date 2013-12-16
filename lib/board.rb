@@ -16,20 +16,24 @@ class Board
     return @spaces
   end
 
+  def board_map
+    spaces.keys.each_slice(@board_size).to_a
+  end
+
   def rows
     @rows = spaces.values.each_slice(@board_size).to_a
   end
 
   def columns
-    @columns = @rows.transpose
+    @columns = rows.transpose
   end
 
   def left_diagonal
-    @left_diagonal = (0...@board_size).collect { |i| @rows[i][i] }
+    @left_diagonal = (0...@board_size).collect { |i| rows[i][i] }
   end
 
   def right_diagonal
-    @right_diagonal = (0...@board_size).collect { |i| @rows[i][(@board_size - 1) - i] }
+    @right_diagonal = (0...@board_size).collect { |i| rows[i][(@board_size - 1) - i] }
   end
 end
 

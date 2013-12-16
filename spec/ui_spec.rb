@@ -31,8 +31,8 @@ describe UI do
 
   describe "#get_input" do
     it "should get input from a user and return that value" do
-    input_from_user = @ui.get_input()
-    input.should eq 4
+    input = @ui.get_input("message")
+    input.should eq "x" 
     end
   end
 
