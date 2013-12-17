@@ -11,28 +11,45 @@ describe Game do
     end
   end
 
-  describe "#select_token check X" do
+  describe "#select_mark check X" do
     it "should return 'x'" do
-      @game.select_token.should eq "x"
+      @game.select_mark("Select X").should eq "x"
     end
   end
 
-  describe "#is_token_valid? check X is true" do
+  describe "#is_mark_valid? check X is true" do
     it "should be true" do
-      @game.is_token_valid?("X").should eq true
+      @game.is_mark_valid?("X").should eq true
     end
   end
 
-  describe "#is_token_valid? check O is true" do
+  describe "#is_mark_valid? check O is true" do
     it "should be true" do
-      @game.is_token_valid?("O").should eq true
+      @game.is_mark_valid?("O").should eq true
     end
   end
-  
-  describe "#is_token_valid? check false" do
+
+  describe "#is_mark_valid? check false" do
     it "should be false" do
-      @game.is_token_valid?("f").should eq  false
+      @game.is_mark_valid?("f").should eq false
     end
   end
 
+  describe "#game_over test player x win" do
+    it "should return X as the winner" do
+      @game.game_over("x").should eq "x wins!"
+    end
+  end
+
+  describe "#game_over test player o win" do
+    it "should retun O as the winner" do
+      @game.game_over("o").should eq "o wins!"
+    end
+  end
+
+  describe "#game_over test tie" do
+    it "should return a tie game" do
+      @game.game_over("").should eq "Tie game!"
+    end
+  end
 end
