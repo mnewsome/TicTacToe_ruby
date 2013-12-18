@@ -16,6 +16,10 @@ class Board
     return @spaces
   end
 
+  def available_spaces
+    @spaces.select {|key, value| value == ""}.keys
+  end
+
   def board_map
     spaces.keys.each_slice(@board_size).to_a
   end

@@ -31,10 +31,19 @@ describe Board do
      end
    end
 
+   describe "#available_spaces" do
+     it "should return the keys that have '' values" do
+       @board.spaces[3] = "x"
+       @board.spaces[6] = "x"
+       @board.spaces[9] = "x"
+       @board.available_spaces.should eq [1, 2, 4, 5, 7, 8]
+     end
+   end
+
   describe "#board_map" do
     it "should return nested arrays with the keys from initalize_spaces" do
         @board.board_map.should eq [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    end 
+    end
   end
 
   describe "#rows" do

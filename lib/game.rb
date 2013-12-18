@@ -29,7 +29,7 @@ class Game
   def create_players
     number_of_players = @ui.get_input("How many players are playing? (1 or 2) ").to_i
     if not is_number_of_players_valid?(number_of_players)
-      set_number_of_players
+      create_players
     end
     assign_players(number_of_players)
   end
@@ -63,7 +63,7 @@ class Game
   def select_mark(message)
     @mark = @ui.get_input(message)
     if not is_mark_valid?(mark)
-      select_mark
+      select_mark("Please enter 'x' or 'o'")
     end
     @mark
   end
@@ -88,12 +88,29 @@ class Game
         game_over("")
       end
     else
+      player1_move = get_player_move(@player1)
       @board.spaces[@player1.move.to_i] = @player1.mark
       @ui.print_board(@board.rows)
+
+      player2_move = get_player_move(@player2)
       @board.spaces[@player2.move.to_i] = @player2.mark
       @ui.print_board(@board.rows)
+
       run_game_sequence(@player1, @player2)
     end
+  end
+
+  def get_player_move(player)
+     move = player.move
+     if is_move_valid?(move)
+       return move
+     else
+       get_player_move(player)
+     end
+  end
+
+  def is_move_valid?(move)
+    @board.available_spaces.include?(move)
   end
 
   def game_over(mark)

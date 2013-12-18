@@ -11,7 +11,7 @@ class Player
   end
 
   def move
-    @ui.get_input("Choose your space")
+    @ui.get_input("Choose your space").to_i
   end
 
 end

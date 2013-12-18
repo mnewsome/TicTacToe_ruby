@@ -52,4 +52,10 @@ describe Game do
       @game.game_over("").should eq "Tie game!"
     end
   end
+
+  describe "#is_move_valid? test true" do
+    it "should return true" do
+      @game.is_move_valid?(9).should eq true
+    end
+  end
 end

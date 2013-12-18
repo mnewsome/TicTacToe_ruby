@@ -32,7 +32,7 @@ describe UI do
   describe "#get_input" do
     it "should get input from a user and return that value" do
     input = @ui.get_input("UI Class. Test Input")
-    input.should eq "x" 
+    input.should eq "x"
     end
   end
 
