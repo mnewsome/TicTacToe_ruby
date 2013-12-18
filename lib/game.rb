@@ -88,13 +88,21 @@ class Game
         game_over("")
       end
     else
-      player1_move = get_player_move(@player1)
-      @board.spaces[@player1.move.to_i] = @player1.mark
+      p1_move = get_player_move(@player1)
+      @board.spaces[p1_move] = @player1.mark
       @ui.print_board(@board.rows)
 
-      player2_move = get_player_move(@player2)
-      @board.spaces[@player2.move.to_i] = @player2.mark
+      if @game_state.is_winner_declared?
+        if @game_state.is_winner?(@player1.mark)
+          p "winner"
+          game_over(@player1.mark)
+        end
+      end
+
+      p2_move = get_player_move(@player2)
+      @board.spaces[p2_move] = @player2.mark
       @ui.print_board(@board.rows)
+
 
       run_game_sequence(@player1, @player2)
     end

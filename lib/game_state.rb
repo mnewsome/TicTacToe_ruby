@@ -7,12 +7,10 @@ class GameState
   end
 
   def is_board_full?
-    @board.spaces.each do |key, value|
-      if value == ""
-        return false
-      else
-        return true
-      end
+    if @board.spaces.select { |key, value| value == ""  }.values.include?("")
+      return false
+    else
+      return true
     end
   end
 

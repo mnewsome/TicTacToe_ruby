@@ -17,7 +17,7 @@ class Board
   end
 
   def available_spaces
-    @spaces.select {|key, value| value == ""}.keys
+    @spaces.select { |key, value| value == "" }.keys
   end
 
   def board_map
