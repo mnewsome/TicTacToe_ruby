@@ -7,7 +7,7 @@ require 'player'
 
 class Game
 
-  attr_accessor :mark, :player1, :player2
+  attr_accessor :mark, :player1, :player2, :ui
 
   def initialize(board, ui)
     @board = board
@@ -148,7 +148,8 @@ class Game
 
   def exit_game
     at_exit { puts "Thanks for playing!" }
-    exit
+    Exit.exit
+    #exit
   end
 
 end

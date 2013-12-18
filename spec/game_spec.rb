@@ -42,21 +42,51 @@ describe Game do
   end
 
   describe "#game_over test player x win" do
-    it "should return X as the winner" do
-      @game.game_over("x").should raise SystemExit
+    it "should return 'x' as the winner" do
+      Exit.stub(:exit)
+      @game.game_over("x")
     end
   end
 
   describe "#game_over test player o win" do
-    it "should retun O as the winner" do
-      @game.game_over("o").should eq "o wins!"
+    it "should return 'o' as the winner" do
+      Exit.stub(:exit)
+      @game.game_over("o")
     end
   end
 
   describe "#game_over test tie" do
     it "should return a tie game" do
-      @game.game_over("").should eq "Tie game!"
+      Exit.stub(:exit)
+      @game.game_over("")
     end
   end
 
+  describe "#create_players" do
+    it "should accept a 1 as input" do
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:get_input).once.with("How many players are playing? (1 or 2) ").and_return(1)
+      @game.stub(:assign_players)
+      @game.create_players
+    end
+
+    it "should accept 2 as input" do
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:get_input).once.with("How many players are playing? (1 or 2) ").and_return(2)
+      @game.stub(:assign_players)
+      @game.create_players
+    end
+
+
+    it "should ask user for input again when input is invalid" do
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:get_input).at_least(2).times.with("How many players are playing? (1 or 2) ").and_return(0, 0, 1,)
+      @game.stub(:assign_players)
+      @game.create_players
+    end
+  end
 end
+
