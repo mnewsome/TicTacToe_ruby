@@ -35,9 +35,15 @@ describe Game do
     end
   end
 
+  describe "#is_move_valid? test true" do
+    it "should return true" do
+      @game.is_move_valid?(9).should eq true
+    end
+  end
+
   describe "#game_over test player x win" do
     it "should return X as the winner" do
-      @game.game_over("x").should eq "x wins!"
+      @game.game_over("x").should raise SystemExit
     end
   end
 
@@ -53,9 +59,4 @@ describe Game do
     end
   end
 
-  describe "#is_move_valid? test true" do
-    it "should return true" do
-      @game.is_move_valid?(9).should eq true
-    end
-  end
 end

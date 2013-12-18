@@ -44,17 +44,21 @@ class Game
 
   def assign_players(number_of_players)
     if number_of_players == 1
+      player1_name = @ui.get_input("Type your name")
       player1_mark = select_mark("Choose your mark - x or o")
-      @player1 = Player.new(player1_mark)
+      @player1 = Player.new(player1_mark, player1_name)
     elsif number_of_players == 2
-      player1_mark = select_mark("Player 1, choose your mark - x or o")
-      @player1 = Player.new(player1_mark)
+      player1_name = @ui.get_input("Player 1, type your name")
+      player2_name = @ui.get_input("Player 2, type your name")
+
+      player1_mark = select_mark("#{player1_name}, choose your mark - x or o")
+      @player1 = Player.new(player1_mark, player1_name)
       if player1_mark.downcase == "x"
-        @player2 = Player.new("o")
-        @ui.print_message("Player 2, you will be 'o'")
+        @player2 = Player.new("o", player2_name)
+        @ui.print_message("#{player2_name}, you will be 'o'")
       else
-        @player2 = Player.new("x")
-        @ui.print_message("Player 2, you will be 'x'")
+        @player2 = Player.new("x", player2_name)
+        @ui.print_message("#{player2_name}, you will be 'x'")
       end
     end
     run_game_sequence(@player1, @player2)
@@ -88,24 +92,35 @@ class Game
         game_over("")
       end
     else
-      p1_move = get_player_move(@player1)
-      @board.spaces[p1_move] = @player1.mark
-      @ui.print_board(@board.rows)
-
-      if @game_state.is_winner_declared?
-        if @game_state.is_winner?(@player1.mark)
-          p "winner"
-          game_over(@player1.mark)
-        end
+      if @player1.mark == "x"
+        x_move(@player1)
+        o_move(@player2)
+      else
+        x_move(@player2)
+        o_move(@player1)
       end
-
-      p2_move = get_player_move(@player2)
-      @board.spaces[p2_move] = @player2.mark
-      @ui.print_board(@board.rows)
-
-
       run_game_sequence(@player1, @player2)
     end
+  end
+
+  def x_move(player)
+      move = get_player_move(player)
+      @board.spaces[move] = player.mark
+      @ui.print_board(@board.rows)
+
+      if @game_state.is_winner?(player.mark)
+        game_over(player.mark)
+      end
+  end
+
+  def o_move(player)
+      move = get_player_move(player)
+      @board.spaces[move] = player.mark
+      @ui.print_board(@board.rows)
+
+      if @game_state.is_winner?(player.mark)
+        game_over(player.mark)
+      end
   end
 
   def get_player_move(player)
@@ -124,9 +139,16 @@ class Game
   def game_over(mark)
     if mark == ""
       @ui.print_message("Tie game!")
+      exit_game
     else
       @ui.print_message("#{mark} wins!")
+      exit_game
     end
+  end
+
+  def exit_game
+    at_exit { puts "Thanks for playing!" }
+    exit
   end
 
 end

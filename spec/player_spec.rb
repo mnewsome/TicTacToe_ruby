@@ -3,7 +3,7 @@ require 'player'
 
 describe Player do
   before(:each) do
-    @player = Player.new("x")
+    @player = Player.new("x", "Player Name")
   end
 
   describe "#new" do
@@ -14,8 +14,9 @@ describe Player do
 
   describe "#move" do
     it "should return the player move" do
-      @player.move = 1
-      @player.should_not be_nil
+      input = 7
+      puts "type a 7"
+      @player.move.should eq input
     end
   end
 
