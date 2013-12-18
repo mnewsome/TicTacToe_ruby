@@ -50,27 +50,32 @@ describe Game do
     it "should return false if number of players not 1 oe 2" do
       @game.is_number_of_players_valid?(3).should eq false
     end
+
   describe "#select_mark check X" do
     it "should return 'x'" do
       @game.select_mark("Select X").should eq "x"
     end
   end
 
-  describe "#is_mark_valid? check X is true" do
-    it "should be true" do
+  describe "#is_mark_valid?" do
+    it "should be true if mark is x" do
       @game.is_mark_valid?("X").should eq true
     end
-  end
 
-  describe "#is_mark_valid? check O is true" do
-    it "should be true" do
+    it "should be true if mark is o" do
       @game.is_mark_valid?("O").should eq true
+    end
+
+    it "should be false if not x or o" do
+      @game.is_mark_valid?("f").should eq false
     end
   end
 
-  describe "#is_mark_valid? check false" do
-    it "should be false" do
-      @game.is_mark_valid?("f").should eq false
+  describe "#get_player_move" do
+    it "should return the move if the move is valid" do
+      player = double()
+      player.stub(:move) { 1 }
+      @game.get_player_move(player).should eq 1
     end
   end
 
