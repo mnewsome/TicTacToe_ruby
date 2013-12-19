@@ -140,6 +140,8 @@ describe Game do
   describe "#select_mark" do
     it "should return 'x'" do
       ui = double()
+      @game.ui = ui
+      ui.should_receive(:get_input).once.with("Please enter 'x' or 'o'").and_return("x")
       @game.select_mark("Please enter 'x' or 'o'")
     end
 
