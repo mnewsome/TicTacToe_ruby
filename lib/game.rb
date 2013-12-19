@@ -23,7 +23,7 @@ class Game
   end
 
   def instructions
-    @ui.print_message("Press the number on the key pad that corresponds to the space you'd like.")
+    @ui.print_message("Press the number that corresponds to the space you'd like.")
   end
 
   def create_players

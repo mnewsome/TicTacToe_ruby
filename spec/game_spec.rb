@@ -11,6 +11,15 @@ describe Game do
     end
   end
 
+  describe "#instructions" do
+    it "should print the game instructions" do
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:print_message).once.with("Press the number that corresponds to the space you'd like.")
+      @game.instructions
+    end
+  end
+
   describe "#create_players" do
     it "should accept a 1 as input" do
       ui = double()
@@ -41,19 +50,36 @@ describe Game do
     it "should return true if number of players is 1" do
       @game.is_number_of_players_valid?(1).should eq true
     end
-  end
 
     it "should return true if number of players is 2" do
       @game.is_number_of_players_valid?(2).should eq true
     end
 
-    it "should return false if number of players not 1 oe 2" do
+    it "should return false if number of players not 1 or 2" do
       @game.is_number_of_players_valid?(3).should eq false
     end
+  end
 
-  describe "#select_mark check X" do
+  describe "#select_mark" do
     it "should return 'x'" do
-      @game.select_mark("Select X").should eq "x"
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:get_input).once.with("Please enter 'x' or 'o'").and_return("x")
+      @game.select_mark("Please enter 'x' or 'o'")
+    end
+
+    it "should return 'o'" do
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:get_input).once.with("Please enter 'x' or 'o'").and_return("o")
+      @game.select_mark("Please enter 'x' or 'o'")
+    end
+
+    it "should ask user for input again if mark is invalid" do
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:get_input).at_least(2).times.with("Please enter 'x' or 'o'").and_return("f", "x")
+      @game.select_mark("Please enter 'x' or 'o'")
     end
   end
 
@@ -88,6 +114,9 @@ describe Game do
   describe "#game_over test player x win" do
     it "should return 'x' as the winner" do
       Exit.stub(:exit)
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:print_message).once.with("x wins!")
       @game.game_over("x")
     end
   end
@@ -95,6 +124,9 @@ describe Game do
   describe "#game_over test player o win" do
     it "should return 'o' as the winner" do
       Exit.stub(:exit)
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:print_message).once.with("o wins!")
       @game.game_over("o")
     end
   end
