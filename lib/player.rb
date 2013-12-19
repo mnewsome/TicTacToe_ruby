@@ -2,8 +2,8 @@ require 'ui'
 
 class Player
 
-  attr_reader :mark
-  attr_accessor :move
+  attr_reader :mark, :name
+  attr_accessor :move, :ui
 
   def initialize(mark, name)
     @mark = mark

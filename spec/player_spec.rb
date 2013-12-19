@@ -14,9 +14,10 @@ describe Player do
 
   describe "#move" do
     it "should return the player move" do
-      input = 7
-      puts "type a 7"
-      @player.move.should eq input
+      ui = double()
+      @player.ui = ui
+      ui.should_receive(:get_input).once.with("#{@player.name}, choose your space").and_return(2)
+      @player.move
     end
   end
 

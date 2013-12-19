@@ -113,6 +113,28 @@ describe Game do
       @game.assign_players(2)
     end
 
+    it "should assign player 2 as 'o'" do
+      ui = double()
+      @game.ui = ui
+      @game.ui.stub(:get_input) { "Player 1" }
+      @game.ui.stub(:get_input) { "Player 2" }
+      @game.stub(:select_mark) { "x" }
+      ui.should_receive(:print_message).once.with("Player 2, you will be 'o'")
+      @game.stub(:run_game_sequence)
+      @game.assign_players(2)
+    end
+
+    it "should assign player 2 as 'x'" do
+      ui = double()
+      @game.ui = ui
+      @game.ui.stub(:get_input) { "Player 1" }
+      @game.ui.stub(:get_input) { "Player 2" }
+      @game.stub(:select_mark) { "o" }
+      ui.should_receive(:print_message).once.with("Player 2, you will be 'x'")
+      @game.stub(:run_game_sequence)
+      @game.assign_players(2)
+    end
+
   end
 
   describe "#select_mark" do
@@ -147,6 +169,39 @@ describe Game do
 
     it "should be false if not x or o" do
       @game.is_mark_valid?("f").should eq false
+    end
+  end
+
+  describe "#run_game_sequence" do
+    it "should end the game if x is a winner" do
+      game_state = double()
+      @game.game_state = game_state
+      ui = double()
+      @game.ui = ui
+      player1 = double("player1", :mark => "x")
+      player2 = double("player2", :mark => "o")
+
+      @game.game_state.stub(:is_winner_declared?) { true }
+      @game.game_state.stub(:is_winner?) { true }
+      ui.should_receive(:print_message).once.with("x wins!")
+      @game.stub(:exit_game)
+      @game.run_game_sequence(player1, player2)
+    end
+
+    it "should end the game if o is a winner" do
+      game_state = double()
+      @game.game_state = game_state
+      ui = double()
+      @game.ui = ui
+      player1 = double("player1", :mark => "o")
+      player2 = double("player2", :mark => "x")
+
+      @game.game_state.stub(:is_winner_declared?) { true }
+      @game.game_state.stub(:is_winner?) { true }
+      ui.should_receive(:print_message).once.with("o wins!")
+      @game.stub(:exit_game)
+      @game.run_game_sequence(player1, player2)
+
     end
   end
 

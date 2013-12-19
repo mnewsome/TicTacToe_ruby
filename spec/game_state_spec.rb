@@ -21,6 +21,8 @@ describe GameState do
       @game_state.board.spaces[4] = "o"
       @game_state.board.spaces[5] = "x"
       @game_state.board.spaces[6] = "o"
+      @game_state.board.spaces[7] = "o"
+      @game_state.board.spaces[8] = "o"
       @game_state.board.spaces[9] = "x"
       @game_state.is_board_full?.should eq true
     end

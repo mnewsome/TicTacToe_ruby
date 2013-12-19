@@ -7,7 +7,7 @@ require 'player'
 
 class Game
 
-  attr_accessor :mark, :player1, :player2, :ui
+  attr_accessor :mark, :player1, :player2, :ui, :game_state
 
   def initialize(board, ui)
     @board = board
@@ -82,24 +82,24 @@ class Game
 
   def run_game_sequence(player1, player2)
     if @game_state.is_winner_declared?
-      if @game_state.is_winner?(@player1)
-        game_over(@player1.mark)
-      elsif @game_state.is_winner?(@player2)
-        game_over(@player2.mark)
+      if @game_state.is_winner?(player1)
+        game_over(player1.mark)
+      elsif @game_state.is_winner?(player2)
+        game_over(player2.mark)
       end
     elsif @game_state.is_board_full?
       if @game_state.is_a_tie?
         game_over("")
       end
     else
-      if @player1.mark == "x"
-        x_move(@player1)
-        o_move(@player2)
+      if player1.mark == "x"
+        x_move(player1)
+        o_move(player2)
       else
-        x_move(@player2)
-        o_move(@player1)
+        x_move(player2)
+        o_move(player1)
       end
-      run_game_sequence(@player1, @player2)
+      run_game_sequence(player1, player2)
     end
   end
 

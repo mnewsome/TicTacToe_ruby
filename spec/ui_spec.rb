@@ -31,8 +31,8 @@ describe UI do
 
   describe "#get_input" do
     it "should get input from a user and return that value" do
-    input = @ui.get_input("UI Class. Test Input")
-    input.should eq "x"
+      @ui.should_receive(:get_input).once.with("Test input")
+      @ui.get_input("Test input")
     end
   end
 
