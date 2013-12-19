@@ -66,7 +66,7 @@ class Game
 
   def select_mark(message)
     @mark = @ui.get_input(message)
-    if not is_mark_valid?(mark)
+    if not is_mark_valid?(@mark)
       select_mark("Please enter 'x' or 'o'")
     end
     @mark
