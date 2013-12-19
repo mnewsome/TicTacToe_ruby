@@ -11,6 +11,18 @@ describe Game do
     end
   end
 
+  describe "#start_new_game" do
+    it "should print a welcome message"do
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:print_message).once.with("Welcome to Tic Tac Toe!")
+      @game.ui.stub(:print_board) { "[[1, 2, 3], [4, 5, 6], [7, 8, 9]]" }
+      @game.stub(:instructions)
+      @game.stub(:create_players)
+      @game.start_new_game("Welcome to Tic Tac Toe!")
+    end
+  end
+
   describe "#instructions" do
     it "should print the game instructions" do
       ui = double()
@@ -60,11 +72,52 @@ describe Game do
     end
   end
 
+  describe "#assign_players" do
+    it "should get the player's name if 1 player"do
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:get_input).once.with("Type your name").and_return("Malcolm")
+      @game.stub(:select_mark)
+      @game.stub(:run_game_sequence)
+      @game.assign_players(1)
+    end
+
+    it "should prompt the player to choose a mark" do
+      ui = double()
+      @game.ui = ui
+      @game.ui.stub(:get_input) { "Type your name" }
+      ui.should_receive(:get_input).once.with("Please enter 'x' or 'o'").and_return("x")
+      @game.stub(:run_game_sequence)
+      @game.assign_players(1)
+    end
+
+    it "should get Player 1 name if 2 players" do
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:get_input).once.with("Player 1, type your name").and_return("Malcolm")
+      @game.ui.stub(:get_input) { "Player 2" }
+      @game.stub(:select_mark) { "x" }
+      @game.ui.stub(:print_message)
+      @game.stub(:run_game_sequence)
+      @game.assign_players(2)
+    end
+
+    it "should get Player 2 name if 2 players" do
+      ui = double()
+      @game.ui = ui
+      @game.ui.stub(:get_input) { "Player 1" }
+      ui.should_receive(:get_input).once.with("Player 2, type your name").and_return("Newsome")
+      @game.stub(:select_mark) { "x" }
+      @game.ui.stub(:print_message)
+      @game.stub(:run_game_sequence)
+      @game.assign_players(2)
+    end
+
+  end
+
   describe "#select_mark" do
     it "should return 'x'" do
       ui = double()
-      @game.ui = ui
-      ui.should_receive(:get_input).once.with("Please enter 'x' or 'o'").and_return("x")
       @game.select_mark("Please enter 'x' or 'o'")
     end
 
@@ -134,6 +187,9 @@ describe Game do
   describe "#game_over test tie" do
     it "should return a tie game" do
       Exit.stub(:exit)
+      ui = double()
+      @game.ui = ui
+      ui.should_receive(:print_message).once.with("Tie game!")
       @game.game_over("")
     end
   end
