@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in TicTacToe.gemspec
-gemspec
-gem 'rspec', :require => 'spec'
-gem 'guard-rspec', require: false
-
+group :test do
+  gem 'rspec', require: 'spec'
+  gem 'guard-rspec', require: false
+end
