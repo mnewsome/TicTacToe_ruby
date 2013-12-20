@@ -4,6 +4,7 @@ require 'board'
 require 'ui'
 require 'game_state'
 require 'player'
+require 'exit'
 
 class Game
 
@@ -149,7 +150,6 @@ class Game
   def exit_game
     at_exit { puts "Thanks for playing!" }
     Exit.exit
-    #exit
   end
 
 end

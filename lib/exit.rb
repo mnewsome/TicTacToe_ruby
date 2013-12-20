@@ -1,7 +1,7 @@
 class Exit
 
   def self.exit
-    exit
+    abort
   end
 
 end
