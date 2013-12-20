@@ -134,7 +134,6 @@ describe Game do
       @game.stub(:run_game_sequence)
       @game.assign_players(2)
     end
-
   end
 
   describe "#select_mark" do
@@ -203,7 +202,68 @@ describe Game do
       ui.should_receive(:print_message).once.with("o wins!")
       @game.stub(:exit_game)
       @game.run_game_sequence(player1, player2)
+    end
 
+    it "should end the game if a tie" do
+      game_state = double()
+      @game.game_state = game_state
+      ui = double()
+      @game.ui = ui
+      player1 = double("player1", :mark => "o")
+      player2 = double("player2", :mark => "x")
+
+      @game.game_state.stub(:is_winner_declared?) { false }
+      @game.game_state.stub(:is_board_full?) { true }
+      @game.game_state.stub(:is_a_tie?) { true }
+      ui.should_receive(:print_message).once.with("Tie game!")
+      @game.stub(:exit_game)
+      @game.run_game_sequence(player1, player2)
+    end
+
+    it "should prompt player 1 to go first if x" do
+      game_state = double()
+      @game.game_state = game_state
+      ui = double()
+      @game.ui = ui
+      player1 = double("player1", :mark => "x")
+      player2 = double("player2", :mark => "o")
+
+      @game.game_state.stub(:is_winner_declared?) { false }
+      @game.game_state.stub(:is_board_full?) { false }
+      @game.stub(:x_move) { 1 }
+      @game.stub(:o_move) { 2 }
+      @game.stub(:game_over)
+    end
+
+    it "should prompt player 2 to go first if x" do
+      game_state = double()
+      @game.game_state = game_state
+      ui = double()
+      @game.ui = ui
+      player1 = double("player1", :mark => "o")
+      player2 = double("player2", :mark => "x")
+
+      @game.game_state.stub(:is_winner_declared?) { false }
+      @game.game_state.stub(:is_board_full?) { false }
+      @game.stub(:x_move) { 1 }
+      @game.stub(:o_move) { 2 }
+      @game.stub(:game_over)
+    end
+  end
+
+  describe "#x_move" do
+    it "should get the move and print the updated board" do
+      player1 = double("player1", :mark => "x")
+      @game.stub(:get_player_move) { 1 }
+      @game.x_move(player1)
+    end
+  end
+
+  describe "#o_move" do
+    it "should get the move and print the updated board" do
+      player1 = double("player1", :mark => "o")
+      @game.stub(:get_player_move) { 5 }
+      @game.x_move(player1)
     end
   end
 

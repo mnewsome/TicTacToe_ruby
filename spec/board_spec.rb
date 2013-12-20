@@ -49,7 +49,7 @@ describe Board do
   end
 
   describe "#columns" do
-    it "should retun next arays with the values of the spaces" do
+    it "should retun nested arays with the values of the spaces" do
       @board.spaces[2] = "x"
       @board.spaces[5] = "o"
       @board.spaces[8] = "x"
