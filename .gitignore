@@ -18,3 +18,4 @@ tmp
 *.swo
 *.swp
 Guardfile
+.DS_Store
