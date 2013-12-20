@@ -17,15 +17,11 @@ describe Board do
      it "should be a Hash with a key statring at 1" do
        @board.initialize_spaces.keys[0].should eq 1
      end
-   end
 
-   describe "#initialize_spaces" do
      it "should be a Hash with a key ending at 9" do
        @board.initialize_spaces.keys[8].should eq 9
      end
-   end
 
-   describe "#initialize_spaces" do
      it "should have empty strings for all keys" do
        @board.initialize_spaces.values.should eq ["", "", "", "", "", "", "", "", ""]
      end

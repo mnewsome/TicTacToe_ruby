@@ -11,9 +11,7 @@ describe GameState do
     it "should return false" do
       @game_state.is_board_full?.should eq false
     end
-  end
 
-  describe "#is_board_full?" do
     it "should return true" do
       @game_state.board.spaces[1] = "X"
       @game_state.board.spaces[2] = "O"
@@ -28,7 +26,7 @@ describe GameState do
     end
   end
 
-  describe "#is_a_tie test true" do
+  describe "#is_a_tie?" do
     it "should return true" do
       @game_state.board.spaces[1] = "x"
       @game_state.board.spaces[2] = "o"
@@ -41,9 +39,7 @@ describe GameState do
       @game_state.board.spaces[9] = "o"
       @game_state.is_a_tie?.should eq true
     end
-  end
 
-  describe "#is_a_tie? test false" do
     it "should return false" do
       @game_state.is_a_tie?.should eq false
     end
@@ -56,9 +52,7 @@ describe GameState do
       @game_state.board.spaces[3] = "x"
       @game_state.is_winner_declared?.should eq true
     end
-  end
 
-  describe "#is_winner_declared?" do
     it "should return false" do
       @game_state.board.spaces[1] = "x"
       @game_state.board.spaces[5] = ""
@@ -67,65 +61,67 @@ describe GameState do
     end
   end
 
-  describe "#is_winner? rows" do
-    it "should return true" do
+  describe "#is_winner?" do
+    it "rows should return true" do
       @game_state.board.spaces[1] = "x"
       @game_state.board.spaces[2] = "x"
       @game_state.board.spaces[3] = "x"
       @game_state.is_winner?("x").should eq true
     end
-  end
 
-  describe "#is_winner? columns" do
-    it "should return true" do
+    it "columns should return true" do
       @game_state.board.spaces[2] = "o"
       @game_state.board.spaces[5] = "o"
       @game_state.board.spaces[8] = "o"
       @game_state.is_winner?("o").should eq true
     end
-  end
 
-  describe "#is_winner? left_diagonal" do
-    it "should return true" do
+    it "left_diagonal should return true" do
       @game_state.board.spaces[1] = "x"
       @game_state.board.spaces[5] = "x"
       @game_state.board.spaces[9] = "x"
       @game_state.is_winner?("x").should eq true
     end
-  end
 
-  describe "#is_winner? right_diagonal" do
-    it "should return true" do
+    it "right diagonal should return true" do
       @game_state.board.spaces[3] = "o"
       @game_state.board.spaces[5] = "o"
       @game_state.board.spaces[7] = "o"
       @game_state.is_winner?("o").should eq true
     end
-  end
 
-  describe "#is_winner? test false" do
     it "should return false" do
       @game_state.is_winner?("o").should eq false
-      end
-  end
+    end
 
-  describe "#is_winner? false rows" do
-    it "should return false" do
+    it "rows should return false" do
       @game_state.board.spaces[7] = "x"
       @game_state.board.spaces[8] = "o"
       @game_state.board.spaces[9] = "o"
       @game_state.is_winner?("o").should eq false
     end
-  end
 
-  describe "#is_wiinner? false columns" do
-    it "should return false" do
+    it "columns should return false" do
       @game_state.board.spaces[3] = "x"
       @game_state.board.spaces[6] = "x"
       @game_state.board.spaces[9] = ""
       @game_state.is_winner?("x").should eq false
     end
+
+    it "left_diagonal should return false" do
+      @game_state.board.spaces[1] = "x"
+      @game_state.board.spaces[5] = "x"
+      @game_state.board.spaces[9] = ""
+      @game_state.is_winner?("x").should eq false
+    end
+
+    it "right_diagonal should return false" do
+      @game_state.board.spaces[3] = "x"
+      @game_state.board.spaces[5] = ""
+      @game_state.board.spaces[7] = "x"
+      @game_state.is_winner?("x").should eq false
+    end
+
   end
 
 end
-
