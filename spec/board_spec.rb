@@ -19,4 +19,9 @@ describe Board do
     @board.fill_space_at(1, "some arbitrary value")
     @board.get_value_at(1).should == "some arbitrary value"
   end
+
+  it "return all spaces with their values" do
+    @board.fill_space_at(1, "some value")
+    @board.get_all_values.should == ["some value", "", "", "", "", "", "", "", ""]
+  end
 end

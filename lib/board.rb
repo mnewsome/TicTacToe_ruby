@@ -10,10 +10,14 @@ class Board
   end
 
   def get_value_at(space)
-    @spaces[space + 1]
+    @spaces[space - 1]
   end
 
   def fill_space_at(space, value)
-    @spaces[space + 1] = value
+    @spaces[space - 1] = value
+  end
+
+  def get_all_values
+    @spaces
   end
 end
