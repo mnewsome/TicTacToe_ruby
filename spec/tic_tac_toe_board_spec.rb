@@ -39,5 +39,59 @@ describe TicTacToeBoard do
     expect { @ttt_board.fill_space_at(10, "different value") }.to raise_error(ArgumentError, "Space not available")
   end
 
-end
+  it "top row winner should be x" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(2, "x")
+    @ttt_board.fill_space_at(3, "x")
+    @ttt_board.winner.should == "x"
+  end
 
+  it "middle row winner should be x" do
+    @ttt_board.fill_space_at(4, "x")
+    @ttt_board.fill_space_at(5, "x")
+    @ttt_board.fill_space_at(6, "x")
+    @ttt_board.winner.should == "x"
+  end
+
+  it "bottom row winner should be x" do
+    @ttt_board.fill_space_at(7, "x")
+    @ttt_board.fill_space_at(8, "x")
+    @ttt_board.fill_space_at(9, "x")
+    @ttt_board.winner.should == "x"
+  end
+
+  it "left column winner should be x" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(4, "x")
+    @ttt_board.fill_space_at(7, "x")
+    @ttt_board.winner.should == "x"
+  end
+
+  it "middle column winner should be x" do
+    @ttt_board.fill_space_at(2, "x")
+    @ttt_board.fill_space_at(5, "x")
+    @ttt_board.fill_space_at(8, "x")
+    @ttt_board.winner.should == "x"
+  end
+
+  it "bottom column winner should be x" do
+    @ttt_board.fill_space_at(3, "x")
+    @ttt_board.fill_space_at(6, "x")
+    @ttt_board.fill_space_at(9, "x")
+    @ttt_board.winner.should == "x"
+  end
+
+  it "left diagonal winner should be x" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(5, "x")
+    @ttt_board.fill_space_at(9, "x")
+    @ttt_board.winner.should == "x"
+  end
+
+  it "right diagonal winner should be x" do
+    @ttt_board.fill_space_at(3, "x")
+    @ttt_board.fill_space_at(5, "x")
+    @ttt_board.fill_space_at(7, "x")
+    @ttt_board.winner.should == "x"
+  end
+end

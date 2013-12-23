@@ -23,12 +23,28 @@ class TicTacToeBoard < Board
   end
 
   def fill_space_at(space, value)
-    array_index = space - 1
     if get_value_at(space) == space
       @spaces[space - 1] = value
     else
       raise ArgumentError.new( "Space not available" )
     end
   end
+
+  def winner
+    (0...3).each do |i|
+      if rows[i].uniq.length == 1
+        return rows[i].uniq[0]
+      elsif columns[i].uniq.length == 1
+        return columns[i].uniq[0]
+      end
+    end
+
+    if left_diagonal.uniq.length == 1
+      return left_diagonal.uniq[0]
+    elsif right_diagonal.uniq.length == 1
+      return right_diagonal.uniq[0]
+    end
+  end
+
 
 end
