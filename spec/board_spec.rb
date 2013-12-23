@@ -22,6 +22,6 @@ describe Board do
 
   it "return all spaces with their values" do
     @board.fill_space_at(1, "some value")
-    @board.get_all_values.should == ["some value", "", "", "", "", "", "", "", ""]
+    @board.spaces.should == ["some value", "", "", "", "", "", "", "", ""]
   end
 end

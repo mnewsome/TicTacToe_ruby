@@ -17,7 +17,4 @@ class Board
     @spaces[space - 1] = value
   end
 
-  def get_all_values
-    @spaces
-  end
 end

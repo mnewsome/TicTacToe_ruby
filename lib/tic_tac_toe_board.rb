@@ -46,5 +46,8 @@ class TicTacToeBoard < Board
     end
   end
 
+  def tie?
+    true
+  end
 
 end

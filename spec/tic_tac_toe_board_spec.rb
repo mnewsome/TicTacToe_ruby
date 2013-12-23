@@ -94,4 +94,17 @@ describe TicTacToeBoard do
     @ttt_board.fill_space_at(7, "x")
     @ttt_board.winner.should == "x"
   end
+
+  it "game is a tie if all spaces full and no winner" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(2, "o")
+    @ttt_board.fill_space_at(3, "x")
+    @ttt_board.fill_space_at(4, "o")
+    @ttt_board.fill_space_at(5, "x")
+    @ttt_board.fill_space_at(6, "o")
+    @ttt_board.fill_space_at(7, "o")
+    @ttt_board.fill_space_at(8, "x")
+    @ttt_board.fill_space_at(9, "o")
+    @ttt_board.tie?.should == true
+  end
 end
