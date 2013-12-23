@@ -22,4 +22,13 @@ class TicTacToeBoard < Board
     (0...rows[0].size).collect { |i| rows[i][2 - i] }
   end
 
+  def fill_space_at(space, value)
+    array_index = space - 1
+    if get_value_at(space) == space
+      @spaces[space - 1] = value
+    else
+      raise ArgumentError.new( "Space not available" )
+    end
+  end
+
 end

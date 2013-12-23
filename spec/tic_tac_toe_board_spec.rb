@@ -33,5 +33,11 @@ describe TicTacToeBoard do
     @ttt_board.right_diagonal.should == ["some value", 5, 7]
   end
 
+  it "don't allow a move if the space is filled" do
+    @ttt_board.fill_space_at(1, "some value")
+    expect { @ttt_board.fill_space_at(1, "different value") }.to raise_error(ArgumentError, "Space not available")
+    expect { @ttt_board.fill_space_at(10, "different value") }.to raise_error(ArgumentError, "Space not available")
+  end
+
 end
 
