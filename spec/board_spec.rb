@@ -11,8 +11,13 @@ describe Board do
     Board.new(3).size.should == 3
   end
 
-  it "every space is empty by default" do
-    @board.get_value_at(1).should be_empty
+  it "every space is numbered by default" do
+    @board.get_value_at(1).should == 1
+  end
+
+  it "values can be retrieved by space number" do
+    @board.fill_space_at(2, "o")
+    @board.get_value_at(2).should == "o"
   end
 
   it "every space can be filled" do
@@ -22,6 +27,6 @@ describe Board do
 
   it "return all spaces with their values" do
     @board.fill_space_at(1, "some value")
-    @board.spaces.should == ["some value", "", "", "", "", "", "", "", ""]
+    @board.spaces.should == ["some value", 2, 3, 4, 5, 6, 7, 8, 9]
   end
 end

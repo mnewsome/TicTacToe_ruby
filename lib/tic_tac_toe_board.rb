@@ -2,10 +2,6 @@ require "board"
 
 class TicTacToeBoard < Board
 
-  def initialize(size)
-    @spaces = (1..size).to_a
-  end
-
   def rows
     @spaces.each_slice(3).to_a
   end

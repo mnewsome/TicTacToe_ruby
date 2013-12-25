@@ -2,7 +2,7 @@ class Board
   attr_reader :spaces
 
   def initialize(size)
-    @spaces = Array.new(size, "")
+    @spaces = (1..size).to_a
   end
 
   def size
