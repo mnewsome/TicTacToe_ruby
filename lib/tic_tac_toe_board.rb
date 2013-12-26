@@ -27,14 +27,30 @@ class TicTacToeBoard < Board
   end
 
   def winner
-    (0...3).each do |i|
-      if rows[i].uniq.length == 1
-        return rows[i].uniq[0]
-      elsif columns[i].uniq.length == 1
-        return columns[i].uniq[0]
-      end
-    end
+    winner_on_row || winner_on_column || winner_on_diagonal
+  end
 
+  def tie?
+    true
+  end
+
+  private
+
+  def winner_on_row
+    (0..2).each do |i|
+      return rows[i].first if rows[i].uniq.length == 1
+    end
+    nil
+  end
+
+  def winner_on_column
+    (0..2).each do |i|
+      return columns[i].first if columns[i].uniq.length == 1
+    end
+    nil
+  end
+
+  def winner_on_diagonal
     if left_diagonal.uniq.length == 1
       return left_diagonal.uniq[0]
     elsif right_diagonal.uniq.length == 1
