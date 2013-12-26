@@ -31,7 +31,11 @@ class TicTacToeBoard < Board
   end
 
   def tie?
-    true
+    board_full? && winner == nil
+  end
+
+  def game_in_progress?
+    return false if tie? || winner != nil else true
   end
 
   private
@@ -58,12 +62,8 @@ class TicTacToeBoard < Board
     end
   end
 
-  def tie?
-    is_board_full?
-  end
-
-  def is_board_full?
-    @spaces.all? { |i| i.is_a? String }
+  def board_full?
+    @spaces.all? { |i| i.is_a? String }  && winner == nil
   end
 
 end

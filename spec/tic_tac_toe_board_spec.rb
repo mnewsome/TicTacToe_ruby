@@ -108,6 +108,44 @@ describe TicTacToeBoard do
     @ttt_board.tie?.should == true
   end
 
+  it "game is not a tie if the spaces are full but there is a winner" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(2, "x")
+    @ttt_board.fill_space_at(3, "x")
+    @ttt_board.fill_space_at(4, "o")
+    @ttt_board.fill_space_at(5, "o")
+    @ttt_board.fill_space_at(6, "x")
+    @ttt_board.fill_space_at(7, "x")
+    @ttt_board.fill_space_at(8, "x")
+    @ttt_board.fill_space_at(9, "o")
+    @ttt_board.tie?.should == false
+  end
+
+  it "game is in progress if there is no winner and game is not tied" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.game_in_progress?.should == true
+  end
+
+  it "game is not in progress if board is full and no winner" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(2, "o")
+    @ttt_board.fill_space_at(3, "x")
+    @ttt_board.fill_space_at(4, "o")
+    @ttt_board.fill_space_at(5, "x")
+    @ttt_board.fill_space_at(6, "o")
+    @ttt_board.fill_space_at(7, "o")
+    @ttt_board.fill_space_at(8, "x")
+    @ttt_board.fill_space_at(9, "o")
+    @ttt_board.game_in_progress?.should == false
+  end
+
+  it " game is not in progress if there is a winner" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(2, "x")
+    @ttt_board.fill_space_at(3, "x")
+    @ttt_board.game_in_progress?.should == false
+  end
+
   it "game is not a tie if the spaces are not full" do
     @ttt_board.fill_space_at(1, "x")
     @ttt_board.fill_space_at(9, "o")
