@@ -19,15 +19,6 @@ describe UserInterface do
         $stdout = STDOUT
       end
 
-      def capture_stdin(&block)
-        input = StringIO.new
-        $stdin = input
-        yield
-        return input
-      ensure
-        $stdin = STDIN
-      end
-
     end
 
   end
