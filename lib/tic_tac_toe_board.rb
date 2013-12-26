@@ -43,7 +43,11 @@ class TicTacToeBoard < Board
   end
 
   def tie?
-    true
+    is_board_full?
+  end
+
+  def is_board_full?
+    @spaces.all? { |i| i.is_a? String }
   end
 
 end

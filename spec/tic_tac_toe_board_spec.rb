@@ -107,4 +107,11 @@ describe TicTacToeBoard do
     @ttt_board.fill_space_at(9, "o")
     @ttt_board.tie?.should == true
   end
+
+  it "game is not a tie if the spaces are not full" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(9, "o")
+    @ttt_board.tie?.should == false
+  end
+
 end
