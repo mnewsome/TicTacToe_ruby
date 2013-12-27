@@ -31,7 +31,7 @@ describe UserInterface do
   it "print the board" do
     ttt_board = TicTacToeBoard.new(9)
     out = capture_stdout { @ui.print_board(ttt_board.rows) }
-    out.string.should == "1 |\n2 |\n3 |\n4 |\n5 |\n6 |\n7 |\n8 |\n9 |\n"
+    out.string.should == " 1 | 2 | 3 |\n 4 | 5 | 6 |\n 7 | 8 | 9 |\n"
   end
 
   it "print a promt and get input from the user" do
