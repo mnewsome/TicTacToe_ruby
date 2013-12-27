@@ -6,7 +6,6 @@ describe HumanPlayer do
 
   before(:each) do
     @human = HumanPlayer.new("Malcolm", "x", UserInterface.new )
-    @ui = UserInterface.new
   end
 
   it "get the player's name" do
@@ -21,6 +20,5 @@ describe HumanPlayer do
     @human.ui.stub(:get_input).and_return(7)
     @human.move("enter move").should == 7
   end
-
 
 end

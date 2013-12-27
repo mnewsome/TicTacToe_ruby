@@ -34,11 +34,6 @@ describe UserInterface do
     out.string.should == " 1 | 2 | 3 |\n 4 | 5 | 6 |\n 7 | 8 | 9 |\n"
   end
 
-  it "print a promt and get input from the user" do
-    out = capture_stdout { @ui.get_input("Type your name") }
-    out.string.should == "Type your name\n"
-  end
-
   it "get input from the user" do
     @ui.should_receive(:get_input).once.with("Test input")
     @ui.get_input("Test input")
