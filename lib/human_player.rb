@@ -1,15 +1,17 @@
 class HumanPlayer
 
-  attr_reader :name, :mark, :ui
+  attr_reader :name, :mark, :move
 
-  def initialize(name, mark, ui)
+  def set_name(name)
     @name = name
-    @mark = mark
-    @ui = ui
   end
 
-  def move(prompt)
-    @ui.get_input(prompt)
+  def set_mark(mark)
+    @mark = mark
+  end
+
+  def set_move(move)
+    @move = move
   end
 
 end

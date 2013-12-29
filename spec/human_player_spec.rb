@@ -5,20 +5,22 @@ require "user_interface"
 describe HumanPlayer do
 
   before(:each) do
-    @human = HumanPlayer.new("Malcolm", "x", UserInterface.new )
+    @human = HumanPlayer.new
   end
 
   it "get the player's name" do
+    @human.set_name("Malcolm")
     @human.name.should == "Malcolm"
   end
 
   it "get the player's mark" do
+    @human.set_mark("x")
     @human.mark.should == "x"
   end
 
   it "get the player's move" do
-    @human.ui.stub(:get_input).and_return(7)
-    @human.move("enter move").should == 7
+    @human.set_move(7)
+    @human.move.should == 7
   end
 
 end

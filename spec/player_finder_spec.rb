@@ -1,18 +1,17 @@
 require "rspec"
 require "player_finder"
+require "human_player"
 
 describe PlayerFinder do
 
-  before(:each) do
-    HumanPlayer = "HumanPlayer"
-    @player_finder = PlayerFinder.new(HumanPlayer)
-  end
-
   it "return a human player object" do
-   @player_finder.find(1, HumanPlayer).should == [HumanPlayer]
+    test_array = PlayerFinder.new.find(1, "HumanPlayer")
+    test_array[0].should be_instance_of HumanPlayer
   end
 
   it "return 2 human player objects" do
-    @player_finder.find(2, HumanPlayer).should == [HumanPlayer, HumanPlayer]
+    test_array = PlayerFinder.new.find(2, "HumanPlayer")
+    test_array[0].should be_instance_of HumanPlayer
+    test_array[1].should be_instance_of HumanPlayer
   end
 end
