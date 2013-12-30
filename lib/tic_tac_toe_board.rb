@@ -19,8 +19,9 @@ class TicTacToeBoard < Board
   end
 
   def fill_space_at(space, value)
-    if get_value_at(space) == space
-      @spaces[space - 1] = value
+    puts get_value_at(space)
+    if get_value_at(space) == space.to_i
+      @spaces[space.to_i - 1] = value
     else
       raise ArgumentError.new( "Space not available" )
     end

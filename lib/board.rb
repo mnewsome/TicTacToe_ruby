@@ -10,7 +10,7 @@ class Board
   end
 
   def get_value_at(space)
-    @spaces[space - 1]
+    @spaces[space.to_i - 1]
   end
 
   def fill_space_at(space, value)
