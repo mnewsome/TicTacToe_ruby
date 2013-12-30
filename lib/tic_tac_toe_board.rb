@@ -31,15 +31,11 @@ class TicTacToeBoard < Board
   end
 
   def tie?
-    board_full? && winner == nil
+    board_full? && winner.nil?
   end
 
   def game_in_progress?
-    if tie? || winner != nil
-      return false
-    else
-      return true
-    end
+    !(tie? || winner)
   end
 
   private
