@@ -84,7 +84,6 @@ class Run
     else
       get_valid_move(@player2)
     end
-   @ui.print_board(@ttt_board.rows)
   end
 
   def get_o_move
@@ -93,17 +92,16 @@ class Run
     else
       get_valid_move(@player2)
     end
-    @ui.print_board(@ttt_board.rows)
   end
 
   def get_valid_move(player)
     begin
       move = @ui.get_input("#{player.name}, make your move: ")
       @ttt_board.fill_space_at(move, player.mark)
+      @ui.print_board(@ttt_board.rows)
     rescue ArgumentError
       get_valid_move(player)
     end
-
     check_for_winner_or_tie
   end
 
