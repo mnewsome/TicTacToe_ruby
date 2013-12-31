@@ -1,15 +1,12 @@
 class PlayerFinder
 
-  def self.find(number_of_players, human_player)
-    player_list = Array.new
+  def self.find(number_of_players, human_player="HumanPlayer")
+    player_list = []
     if number_of_players == 1
-      player1 = create_human_player(human_player)
-      player_list << player1
+      player_list << create_human_player(human_player)
     elsif number_of_players == 2
-      player1 = create_human_player(human_player)
-      player2 = create_human_player(human_player)
-      player_list << player1
-      player_list << player2
+      player_list << create_human_player(human_player)
+      player_list << create_human_player(human_player)
     end
   end
 
