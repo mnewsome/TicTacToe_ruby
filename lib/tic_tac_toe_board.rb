@@ -38,6 +38,10 @@ class TicTacToeBoard < Board
     !(tie? || winner)
   end
 
+  def is_mark_valid?(mark)
+    mark == "x" || mark == "o"
+  end
+
   private
 
   def winner_on_row

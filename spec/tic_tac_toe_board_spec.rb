@@ -139,7 +139,7 @@ describe TicTacToeBoard do
     @ttt_board.game_in_progress?.should == false
   end
 
-  it " game is not in progress if there is a winner" do
+  it "game is not in progress if there is a winner" do
     @ttt_board.fill_space_at(1, "x")
     @ttt_board.fill_space_at(2, "x")
     @ttt_board.fill_space_at(3, "x")
@@ -152,4 +152,16 @@ describe TicTacToeBoard do
     @ttt_board.tie?.should == false
   end
 
+  it "x mark is valid" do
+    @ttt_board.is_mark_valid?("x").should == true
+  end
+
+  it "o mark is valid" do
+    @ttt_board.is_mark_valid?("o").should == true
+  end
+
+  it "marks other than x or o are false" do
+    @ttt_board.is_mark_valid?("p").should == false
+    @ttt_board.is_mark_valid?(1).should == false
+  end
 end
