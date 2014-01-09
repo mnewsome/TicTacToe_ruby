@@ -23,13 +23,11 @@ class GameSequence
     @player_finder.find(player_count)
   end
 
-  def set_player_names(players, name1, name2="Player2")
+  def set_player_names(players, name1, name2="Player 2")
     @player1 = players[0]
     @player1.set_name(name1)
-    if players[1].instance_of? HumanPlayer
-      @player2 = players[1]
-      @player2.set_name(name2)
-    end
+    @player2 = players[1]
+    @player2.set_name(name2)
   end
 
   def set_player_marks(players, player1_mark_choice)
