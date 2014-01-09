@@ -2,6 +2,14 @@ require "board"
 
 class TicTacToeBoard < Board
 
+  X_MARK = "x"
+  O_MARK = "o"
+
+  attr_reader :x_mark, :o_mark
+
+  @x_mark = X_MARK
+  @o_mark = O_MARK
+
   def rows
     @spaces.each_slice(3).to_a
   end
@@ -39,7 +47,7 @@ class TicTacToeBoard < Board
   end
 
   def is_mark_valid?(mark)
-    mark == "x" || mark == "o"
+    mark == X_MARK || mark == O_MARK
   end
 
   private
