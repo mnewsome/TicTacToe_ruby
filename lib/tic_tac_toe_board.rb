@@ -5,11 +5,6 @@ class TicTacToeBoard < Board
   X_MARK = "x"
   O_MARK = "o"
 
-  attr_reader :x_mark, :o_mark
-
-  @x_mark = X_MARK
-  @o_mark = O_MARK
-
   def rows
     @spaces.each_slice(3).to_a
   end

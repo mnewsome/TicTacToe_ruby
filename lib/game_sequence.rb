@@ -58,7 +58,7 @@ class GameSequence
   end
 
   def game_over?
-    @ttt_board.tie? || !@ttt_board.winner.nil?
+    !@ttt_board.game_in_progress?
   end
 
   private

@@ -8,7 +8,7 @@ require "user_interface"
 describe GameSequence do
 
   before(:each) do
-    @gs = GameSequence.new(ttt_board=TicTacToeBoard.new(9), PlayerFinder, ui=UserInterface.new)
+    @gs = GameSequence.new(ttt_board=TicTacToeBoard.new(9), PlayerFinder, ui=UserInterface)
     @ttt_board = ttt_board
   end
 
