@@ -7,7 +7,7 @@ require "tic_tac_toe_board"
 require "user_interface"
 
 if __FILE__ == $0
-  ui = UserInterface.new
+  ui = UserInterface
   player_finder = PlayerFinder
   ttt_board = TicTacToeBoard.new(9)
   game_sequence = GameSequence.new(ttt_board, player_finder, ui)
