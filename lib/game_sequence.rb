@@ -45,15 +45,9 @@ class GameSequence
     if game_over?
       print_winner_or_tie
     else
-      if @player1.mark == "x"
-        x_make_move(@player1)
-        o_make_move(@player2)
-        run_game_sequence
-      else
-        x_make_move(@player2)
-        o_make_move(@player1)
-        run_game_sequence
-      end
+      make_move(first_player_to_make_move)
+      make_move(second_player_to_make_move)
+      run_game_sequence
     end
   end
 
@@ -110,17 +104,26 @@ class GameSequence
     end
   end
 
-  def x_make_move(player)
+  def make_move(player)
     get_valid_move(player)
     if game_over?
       print_winner_or_tie
     end
   end
 
-  def o_make_move(player)
-    get_valid_move(player)
-    if game_over?
-      print_winner_or_tie
+  def first_player_to_make_move
+    if @player1.mark == "x"
+      return @player1
+    else
+      return @player2
+    end
+  end
+
+  def second_player_to_make_move
+    if @player1.mark == "o"
+      return @player1
+    else
+      return @player2
     end
   end
 

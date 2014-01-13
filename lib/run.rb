@@ -1,6 +1,7 @@
 $: << File.expand_path(File.dirname(__FILE__) + "/../lib")
 
 require "game_sequence"
+require "computer_player"
 require "human_player"
 require "player_finder"
 require "tic_tac_toe_board"
