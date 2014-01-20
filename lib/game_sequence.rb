@@ -85,7 +85,7 @@ class GameSequence
 
   def get_valid_move(player)
     if player.name == "Computer Player"
-      @ui.print_message( "I'm thinking of a move. One momnent please...")
+      @ui.print_message( "I'm thinking of a move. One moment please...")
       move = player.get_best_move(@ttt_board)
     else
       move = @ui.get_input("#{player.name}, pick your space")
