@@ -15,11 +15,8 @@ class ComputerPlayer
   end
 
   def get_best_move(board, depth=0, best_score={})
-    if board.tie?
-      return 0
-    elsif !board.winner.nil?
-        return -1
-    end
+    return 0 if board.tie?
+    return -1 if board.game_over?
 
     board.available_spaces.each do |space|
       board.fill_space_at(space, board.next_player_mark)
