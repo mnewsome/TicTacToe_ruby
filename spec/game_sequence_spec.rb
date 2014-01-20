@@ -48,21 +48,4 @@ describe GameSequence do
     @gs.player2.mark.should == "x"
   end
 
-  it "game is over due to tie" do
-    @ttt_board.stub(:tie?).and_return(true)
-    @ttt_board.stub(:winner).and_return(nil)
-    @gs.game_over?.should == true
-  end
-
-  it "game is over due to winner" do
-    @ttt_board.stub(:tie?).and_return(false)
-    @ttt_board.stub(:winner).and_return("x")
-    @gs.game_over?.should == true
-  end
-
-  it "game is not over" do
-    @ttt_board.stub(:tie?).and_return(false)
-    @ttt_board.stub(:winner).and_return(nil)
-    @gs.game_over?.should == false
-  end
 end

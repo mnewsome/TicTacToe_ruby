@@ -28,15 +28,9 @@ describe TicTacToeBoard do
     @ttt_board.left_diagonal.should == [1, "some value", 9]
   end
 
-  it "return the valuue of the right diagonal" do
+  it "return the value of the right diagonal" do
     @ttt_board.fill_space_at(3, "some value")
     @ttt_board.right_diagonal.should == ["some value", 5, 7]
-  end
-
-  it "don't allow a move if the space is filled" do
-    @ttt_board.fill_space_at(1, "some value")
-    expect { @ttt_board.fill_space_at(1, "different value") }.to raise_error(ArgumentError, "Space not available")
-    expect { @ttt_board.fill_space_at(10, "different value") }.to raise_error(ArgumentError, "Space not available")
   end
 
   it "top row winner should be x" do
@@ -123,7 +117,7 @@ describe TicTacToeBoard do
 
   it "game is in progress if there is no winner and game is not tied" do
     @ttt_board.fill_space_at(1, "x")
-    @ttt_board.game_in_progress?.should == true
+    @ttt_board.game_over?.should == false
   end
 
   it "game is not in progress if board is full and no winner" do
@@ -136,14 +130,14 @@ describe TicTacToeBoard do
     @ttt_board.fill_space_at(7, "o")
     @ttt_board.fill_space_at(8, "x")
     @ttt_board.fill_space_at(9, "o")
-    @ttt_board.game_in_progress?.should == false
+    @ttt_board.game_over?.should == true
   end
 
   it "game is not in progress if there is a winner" do
     @ttt_board.fill_space_at(1, "x")
     @ttt_board.fill_space_at(2, "x")
     @ttt_board.fill_space_at(3, "x")
-    @ttt_board.game_in_progress?.should == false
+    @ttt_board.game_over?.should == true
   end
 
   it "game is not a tie if the spaces are not full" do
@@ -163,5 +157,16 @@ describe TicTacToeBoard do
   it "marks other than x or o are false" do
     @ttt_board.is_mark_valid?("p").should == false
     @ttt_board.is_mark_valid?(1).should == false
+  end
+
+  it "o is next move" do
+    @ttt_board.fill_space_at(5, "x")
+    @ttt_board.next_player_mark.should == "o"
+  end
+
+  it "x is next move" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(3, "o")
+    @ttt_board.next_player_mark.should == "x"
   end
 end

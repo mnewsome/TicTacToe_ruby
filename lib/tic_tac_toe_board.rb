@@ -6,7 +6,7 @@ class TicTacToeBoard < Board
   O_MARK = "o"
 
   def rows
-    @spaces.each_slice(3).to_a
+    @spaces.each_slice(depth).to_a
   end
 
   def columns
@@ -21,14 +21,6 @@ class TicTacToeBoard < Board
     (0...rows[0].size).collect { |i| rows[i][2 - i] }
   end
 
-  def fill_space_at(space, value)
-    if get_value_at(space) == space.to_i
-      @spaces[space.to_i - 1] = value
-    else
-      raise ArgumentError.new( "Space not available" )
-    end
-  end
-
   def winner
     winner_on_row || winner_on_column || winner_on_diagonal
   end
@@ -37,12 +29,20 @@ class TicTacToeBoard < Board
     board_full? && winner.nil?
   end
 
-  def game_in_progress?
-    !(tie? || winner)
+  def game_over?
+    (tie? || winner == X_MARK || winner == O_MARK)
   end
 
   def is_mark_valid?(mark)
     mark == X_MARK || mark == O_MARK
+  end
+
+  def next_player_mark
+    if number_of_empty_spaces.even?
+      return O_MARK
+    else
+      return X_MARK
+    end
   end
 
   private
@@ -70,7 +70,10 @@ class TicTacToeBoard < Board
   end
 
   def board_full?
-    @spaces.all? { |i| i.is_a? String }  && winner == nil
+    @spaces.all? { |space| space.is_a? String }  && winner == nil
   end
 
+  def number_of_empty_spaces
+    @spaces.count { |space| space.is_a? Fixnum }
+  end
 end

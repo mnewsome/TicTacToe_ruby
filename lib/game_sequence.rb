@@ -1,6 +1,6 @@
 class GameSequence
 
-  attr_accessor :player1, :player2
+  attr_accessor :player1, :player2, :selected_number_of_players
 
   def initialize(ttt_board, player_finder, ui)
     @ttt_board = ttt_board
@@ -42,7 +42,7 @@ class GameSequence
   end
 
   def run_game_sequence
-    if game_over?
+    if @ttt_board.game_over?
       print_winner_or_tie
     else
       make_move(first_player_to_make_move)
@@ -51,16 +51,12 @@ class GameSequence
     end
   end
 
-  def game_over?
-    !@ttt_board.game_in_progress?
-  end
-
   private
 
   def number_of_players
-    selected_number = @ui.get_input("How many players (1 or 2)?").to_i
-    if selected_number == 1 || selected_number == 2
-      return selected_number
+    @selected_number_of_players = @ui.get_input("How many players (1 or 2)?").to_i
+    if @selected_number_of_players == 1 || @selected_number_of_players == 2
+      return @selected_number_of_players
     else
       number_of_players
     end
@@ -68,10 +64,14 @@ class GameSequence
 
   def get_player_names
     names_array = []
-    first_player = @ui.get_input("Player 1, please enter your name: ")
-    second_player = @ui.get_input("Player 2, please enter your name: ")
-    names_array << first_player
-    names_array << second_player
+    first_player_name = @ui.get_input("Player 1, please enter your name: ")
+    if @selected_number_of_players == 2
+      second_player_name = @ui.get_input("Player 2, please enter your name: ")
+    else
+      second_player_name  = "Computer Player"
+    end
+    names_array << first_player_name
+    names_array << second_player_name
   end
 
   def get_player_mark
@@ -84,7 +84,12 @@ class GameSequence
   end
 
   def get_valid_move(player)
-    move = @ui.get_input("#{player.name}, pick your space")
+    if player.name == "Computer Player"
+      @ui.print_message( "I'm thinking of a move. One momnent please...")
+      move = player.get_best_move(@ttt_board)
+    else
+      move = @ui.get_input("#{player.name}, pick your space")
+    end
     begin
       @ttt_board.fill_space_at(move, player.mark)
       @ui.print_board(@ttt_board.rows)
@@ -106,7 +111,7 @@ class GameSequence
 
   def make_move(player)
     get_valid_move(player)
-    if game_over?
+    if @ttt_board.game_over?
       print_winner_or_tie
     end
   end
