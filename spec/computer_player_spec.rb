@@ -19,12 +19,7 @@ describe ComputerPlayer do
     @computer.mark.should == "o"
   end
 
-  it "get computer player's move" do
-    @computer.set_move(6)
-    @computer.move.should == 6
-  end
-
-  it "get best move" do
+  it "take win whenever possible" do
     @computer.set_mark("x")
     @ttt_board.fill_space_at(1, "x")
     @ttt_board.fill_space_at(2, "o")
@@ -35,21 +30,25 @@ describe ComputerPlayer do
     @computer.get_best_move(@ttt_board).should == 7
   end
 
-  it "get best move" do
-    @ttt_board.fill_space_at(1, "x")
-    @ttt_board.fill_space_at(2, "o")
-    @ttt_board.fill_space_at(3, "x")
-    @ttt_board.fill_space_at(4, "o")
-    @ttt_board.fill_space_at(5, "x")
-    @ttt_board.fill_space_at(7, "o")
-    @computer.get_best_move(@ttt_board).should == 9
-  end
-
-  it "get best move" do
+  it "block opponent win" do
     @ttt_board.fill_space_at(1, "x")
     @ttt_board.fill_space_at(5, "o")
     @ttt_board.fill_space_at(2, "x")
     @computer.get_best_move(@ttt_board).should == 3
+  end
+
+  it "test all corners trap" do
+    @ttt_board.fill_space_at(1, "x")
+    @ttt_board.fill_space_at(5, "o")
+    @ttt_board.fill_space_at(7, "x")
+    @computer.get_best_move(@ttt_board).should == 4
+  end
+
+  it "test all edges trap" do
+    @ttt_board.fill_space_at(2, "x")
+    @ttt_board.fill_space_at(5, "o")
+    @ttt_board.fill_space_at(4, "x")
+    @computer.get_best_move(@ttt_board).should == 1
   end
 
 end

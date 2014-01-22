@@ -10,12 +10,12 @@ class GameSequence
 
   def start_new_game
     @ui.print_message("Welcome to Tic Tac Toe!")
-    @ui.print_board(@ttt_board.rows)
     players = create_players(number_of_players)
     names = get_player_names
     set_player_names(players, names[0], names[1])
     player1_mark = get_player_mark
     set_player_marks(players, player1_mark)
+    @ui.print_board(@ttt_board.rows)
     run_game_sequence
   end
 
