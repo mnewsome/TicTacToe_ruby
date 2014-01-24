@@ -1,3 +1,6 @@
+require "computer_player"
+require "human_player"
+
 class PlayerFinder
 
   def self.find(number_of_players, human_player="HumanPlayer", computer_player="ComputerPlayer")
