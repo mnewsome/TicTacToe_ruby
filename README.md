@@ -24,4 +24,4 @@ Occasionally, the computer will take several seconds to make a move.  When you s
 simply wait unti the board appears again with the computer player's choice and you are prompted
 to make your move.
 
-Thanks for playing!  Enjoy!
+Thanks for playing! Enjoy!
